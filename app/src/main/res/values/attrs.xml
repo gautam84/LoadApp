@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LoadingButton">
+        <attr name="android:text" format="reference" />
+        <attr name="progressText" format="string" />
+        <attr name="android:textSize" format="reference" />
+        <attr name="progressColor" format="color" />
+        <attr name="defaultColor" format="color" />
+        <attr name="ovalProgressColor" format="color" />
+        <attr name="defaultAnimDuration" format="integer" />
+    </declare-styleable>
+</resources>
