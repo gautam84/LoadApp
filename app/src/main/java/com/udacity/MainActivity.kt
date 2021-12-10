@@ -28,8 +28,6 @@ class MainActivity : AppCompatActivity() {
     private var fileNum: Int = 0
 
     private lateinit var notificationManager: NotificationManager
-    private lateinit var pendingIntent: PendingIntent
-    private lateinit var action: NotificationCompat.Action
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +40,7 @@ class MainActivity : AppCompatActivity() {
         ) as NotificationManager
 
         notificationManager.cancelAll()
-
-        createChannel(CHANNEL_ID, "hh")
-
-
+        createChannel(CHANNEL_ID, CHANNEL_NAME)
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
@@ -67,28 +62,18 @@ class MainActivity : AppCompatActivity() {
                     val status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
                     val returnedError =
                         cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_REASON))
-
                     if (status == DownloadManager.STATUS_SUCCESSFUL) {
                         Log.i("Download", "Success")
-
                         notificationManager.sendNotification(1, fileNum, applicationContext)
-
-
                     }
 
                     if (status == DownloadManager.STATUS_FAILED) {
                         Log.i("Download", "Failed")
                         Log.i("Download ", returnedError.toString())
-
                         notificationManager.sendNotification(0, fileNum, applicationContext)
-
-
                     }
-
                 }
             }
-
-
         }
     }
 
@@ -115,13 +100,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-
         private const val LOAD_APP =
             "https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip"
         private const val GLIDE_PROJECT = "https://github.com/bumptech/glide"
         private const val RETROFIT_PROJECT = "https://github.com/square/retrofit"
 
         const val CHANNEL_ID = "channelId"
+        const val CHANNEL_NAME ="LoadAppChannel"
     }
 
     fun selectDownload(view: android.view.View) {

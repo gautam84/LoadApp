@@ -10,7 +10,7 @@
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            android:id="@+id/file_name_label"
+            android:id="@+id/filename_label"
             android:layout_width="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
@@ -62,7 +62,7 @@
 
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@+id/file_name_label"
+            android:id="@+id/filename_label"
             android:layout_width="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
