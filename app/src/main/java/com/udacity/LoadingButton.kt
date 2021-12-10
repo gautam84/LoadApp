@@ -8,6 +8,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.animation.addListener
+import androidx.core.content.ContextCompat.getColor
+import androidx.core.content.withStyledAttributes
 import kotlin.properties.Delegates
 
 class LoadingButton @JvmOverloads constructor(
@@ -25,19 +27,19 @@ class LoadingButton @JvmOverloads constructor(
     private var loadingText = resources.getString(R.string.we_are_loading)
     private var animDuration: Long = 1000
     private var angle = 0f
-    private var currentText = ""
+    private var currentText = resources.getString(R.string.button_name)
 
     private val loadingPaint = Paint().apply {
         isAntiAlias = true
         isDither = true
-        style = Paint.Style.FILL // default: FILL
+        style = Paint.Style.FILL
     }
-    private val textColor = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        textSize = 35f
+    private val textColor = Paint().apply {
+        isAntiAlias = true
+        textSize = 75f
         color = Color.WHITE
         textAlign = Paint.Align.CENTER
         style = Paint.Style.FILL
-        typeface = Typeface.SANS_SERIF
     }
 
     private val textBounds = Rect()
@@ -47,6 +49,12 @@ class LoadingButton @JvmOverloads constructor(
 
 
     init {
+        isClickable = true
+        context.withStyledAttributes(attrs, R.styleable.LoadingButton) {
+            baseColor = getColor(R.styleable.LoadingButton_baseColor, Color.GREEN)
+            animDuration = getInteger(R.styleable.LoadingButton_animDuration, 1000).toLong()
+            textColor.textSize = getDimensionPixelSize(R.styleable.LoadingButton_android_textSize, 16).toFloat()
+        }
 
     }
 
@@ -62,7 +70,10 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     private fun reset() {
-        buttonState = ButtonState.Clicked
+        loadingRect.right = 0
+        angle = 0f
+        currentText = initText
+        invalidate()
     }
 
     private fun showLoading() {
@@ -95,7 +106,8 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     private fun showStartAnimation() {
-        TODO("Not yet implemented")
+        buttonState = ButtonState.Loading
+        currentText = loadingText
     }
 
     @SuppressLint("DrawAllocation")
@@ -104,7 +116,7 @@ class LoadingButton @JvmOverloads constructor(
 
         canvas?.drawColor(baseColor)
         loadingPaint.color = loadingColor
-        canvas?.drawRect(Rect(0, 0, 0, 0), loadingPaint)
+        canvas?.drawRect(loadingRect, loadingPaint)
         currentText?.let {
             textColor.getTextBounds(it, 0, it.length, textBounds)
             canvas?.drawText(
@@ -144,7 +156,7 @@ class LoadingButton @JvmOverloads constructor(
 
     override fun performClick(): Boolean {
         super.performClick()
-        reset()
+        buttonState = ButtonState.Clicked
         return true
     }
 

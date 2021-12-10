@@ -2,9 +2,7 @@
 <resources>
     <declare-styleable name="LoadingButton">
         <attr name="android:textSize" format="reference" />
-        <attr name="progressColor" format="color" />
-        <attr name="defaultColor" format="color" />
-        <attr name="ovalProgressColor" format="color" />
-        <attr name="defaultAnimDuration" format="integer" />
+        <attr name="baseColor" format="color" />
+        <attr name="animDuration" format="integer" />
     </declare-styleable>
 </resources>

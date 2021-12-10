@@ -28,14 +28,12 @@
         android:layout_height="60dp"
         android:text="@string/button_name"
         android:textSize="@dimen/default_text_size"
-        app:defaultAnimDuration="2000"
-        app:defaultColor="@color/colorPrimary"
+        app:animDuration="2000"
+        app:baseColor="@color/colorPrimary"
         android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:ovalProgressColor="@color/colorAccent"
-        app:progressColor="@color/colorPrimaryDark"
     />
 
     <RadioGroup
