@@ -78,32 +78,29 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     private fun showLoading() {
-        valueAnimator.apply {
-            removeAllUpdateListeners()
-            cancel()
-            removeAllListeners()
-            interpolator = AccelerateDecelerateInterpolator()
-            setIntValues(widthSize)
-            addUpdateListener {
-                loadingRect.right = it.animatedValue as Int
-                angle = ((it.animatedValue as Int) * 360 / widthSize).toFloat()
-                loadingRect.bottom = heightSize
-                if (it.animatedValue == widthSize && buttonState == ButtonState.Completed) {
-                    valueAnimator.cancel()
-                }
-                invalidate()
+        valueAnimator.removeAllUpdateListeners()
+        valueAnimator.cancel()
+        valueAnimator.removeAllListeners()
+        valueAnimator.interpolator = AccelerateDecelerateInterpolator()
+        valueAnimator.setIntValues(widthSize)
+        valueAnimator.addUpdateListener {
+            loadingRect.right = it.animatedValue as Int
+            angle = ((it.animatedValue as Int) * 360 / widthSize).toFloat()
+            loadingRect.bottom = heightSize
+            if (it.animatedValue == widthSize && buttonState == ButtonState.Completed) {
+                valueAnimator.cancel()
             }
-            repeatCount = 0
-            addListener(
-                onEnd = {
-                    buttonState = ButtonState.Completed
-                    onEndAnimation?.invoke()
-                }
-            )
-            duration = animDuration
-            start()
-
+            invalidate()
         }
+        valueAnimator.repeatCount = 0
+        valueAnimator.addListener(
+            onEnd = {
+                buttonState = ButtonState.Completed
+                onEndAnimation?.invoke()
+            }
+        )
+        valueAnimator.duration = animDuration
+        valueAnimator.start()
     }
 
     private fun showStartAnimation() {
@@ -115,13 +112,13 @@ class LoadingButton @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        if (canvas != null){
+        if (canvas != null) {
             canvas.drawColor(baseColor)
             loadingPaint.color = loadingColor
             canvas.drawRect(loadingRect, loadingPaint)
             currentText.let {
                 textColor.getTextBounds(it, 0, it.length, textBounds)
-                canvas?.drawText(
+                canvas.drawText(
                     it,
                     (widthSize / 2).toFloat(),
                     heightSize / 2 - textBounds.exactCenterY(),
@@ -141,11 +138,6 @@ class LoadingButton @JvmOverloads constructor(
                 loadingPaint
             )
         }
-
-
-
-
-
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
