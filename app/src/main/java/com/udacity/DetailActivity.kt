@@ -22,12 +22,12 @@ class DetailActivity : AppCompatActivity() {
             else -> "Unknown error occurred"
         }
 
-        file_name.text = filename
-        file_status.text =
+        filename_text.text = filename
+        file_status_text.text =
             if (isSuccessful == 1) getString(R.string.success) else getString(R.string.failure)
-        file_status.setTextColor(if (isSuccessful == 1) Color.GREEN else Color.RED)
+        file_status_text.setTextColor(if (isSuccessful == 1) Color.GREEN else Color.RED)
 
-        details_ok_button.setOnClickListener {
+       ok_button.setOnClickListener {
             finish()
         }
     }

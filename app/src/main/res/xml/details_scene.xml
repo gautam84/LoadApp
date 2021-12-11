@@ -1,115 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:motion="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <Transition
-        motion:autoTransition="animateToEnd"
-        motion:constraintSetEnd="@+id/end"
-        motion:constraintSetStart="@+id/start"
-        motion:duration="1000" />
+        app:autoTransition="animateToEnd"
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="2000" />
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            android:id="@+id/filename_label"
+            android:id="@+id/filename"
             android:layout_width="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent" />
-        <Constraint
-            android:id="@+id/file_status_label"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="0dp"
-            android:alpha="0"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent" />
-
-        <Constraint
-            android:id="@+id/file_name"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@+id/labels_barrier"
-            motion:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="32dp"
+            android:padding="8dp"
+            android:text="@string/filename"
+            android:textSize="@dimen/default_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/file_status"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
         <Constraint
             android:id="@+id/file_status"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
             android:alpha="0"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@+id/labels_barrier"
-            motion:layout_constraintTop_toTopOf="parent" />
+            android:padding="4dp"
+            android:text="@string/status"
+            android:textSize="@dimen/default_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/ok_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filename" />
 
         <Constraint
-            android:id="@+id/details_ok_button"
+            android:id="@+id/filename_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:visibility="invisible"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="4dp"
+            android:alpha="0"
+            android:textSize="@dimen/default_text_size"
+
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/filename"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/filename"
+            app:layout_constraintTop_toTopOf="@+id/filename"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="FILENAME" />
+
+        <Constraint
+            android:id="@+id/file_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:alpha="0"
+            android:textSize="@dimen/default_text_size"
+
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/file_status"
+            app:layout_constraintStart_toEndOf="@+id/file_status"
+            app:layout_constraintTop_toTopOf="@+id/file_status"
+            app:layout_constraintVertical_bias="1.0"
+            tools:text="SUCCESS" />
+
+
+        <Constraint
+            android:id="@+id/ok_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:alpha="0"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/ok"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@+id/filename_label"
+            android:id="@+id/filename"
             android:layout_width="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent" />
-        <Constraint
-            android:id="@+id/file_status_label"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:alpha="1"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/file_name_barrier" />
-
-        <Constraint
-            android:id="@+id/file_name"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@+id/labels_barrier"
-            motion:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="32dp"
+            android:padding="8dp"
+            android:text="@string/filename"
+            android:textSize="@dimen/default_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/file_status"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
         <Constraint
             android:id="@+id/file_status"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:alpha="1"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@+id/labels_barrier"
-            motion:layout_constraintTop_toBottomOf="@+id/file_name_barrier" />
+            android:layout_marginTop="8dp"
+            android:padding="4dp"
+            android:text="@string/status"
+            android:textSize="@dimen/default_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filename" />
 
         <Constraint
-            android:id="@+id/details_ok_button"
+            android:id="@+id/filename_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:visibility="visible"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="4dp"
+            android:textSize="@dimen/default_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/filename"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/filename"
+            app:layout_constraintTop_toTopOf="@+id/filename"
+            tools:text="FILENAME" />
+
+        <Constraint
+            android:id="@+id/file_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:textSize="@dimen/default_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/file_status"
+            app:layout_constraintStart_toEndOf="@+id/file_status"
+            app:layout_constraintTop_toTopOf="@+id/file_status"
+            tools:text="SUCCESS" />
+
+
+        <Constraint
+            android:id="@+id/ok_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/ok"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
     </ConstraintSet>
+
 
 </MotionScene>

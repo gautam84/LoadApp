@@ -2,60 +2,74 @@
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/details_scene"
+    android:id="@+id/details_motion_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:applyMotionScene="true"
     app:layoutDescription="@xml/details_scene"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".DetailActivity"
-    tools:showIn="@layout/activity_detail">
+    tools:showIn="@layout/activity_detail"
+    >
+
 
     <TextView
-        android:id="@+id/filename_label"
+        android:id="@+id/filename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:padding="8dp"
         android:text="@string/filename"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/file_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/file_status_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/status"
-        android:textSize="18sp" />
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/file_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/file_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:padding="4dp"
+        android:text="@string/status"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filename" />
+
+    <TextView
+        android:id="@+id/filename_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp" />
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="4dp"
+        android:textSize="@dimen/default_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/filename"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/filename"
+        app:layout_constraintTop_toTopOf="@+id/filename"
+        tools:text="FILENAME" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/labels_barrier"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        app:barrierDirection="right"
-        app:constraint_referenced_ids="filename_label,file_status_label" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/file_name_barrier"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="filename_label,file_name" />
+    <TextView
+        android:id="@+id/file_status_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:textSize="@dimen/default_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/file_status"
+        app:layout_constraintStart_toEndOf="@+id/file_status"
+        app:layout_constraintTop_toTopOf="@+id/file_status"
+        tools:text="SUCCESS" />
 
     <Button
-        android:id="@+id/details_ok_button"
-        android:layout_width="0dp"
+        android:id="@+id/ok_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/default_text_size"
         android:layout_margin="16dp"
         android:backgroundTint="@color/colorAccent"
         android:text="@string/ok"
@@ -63,5 +77,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

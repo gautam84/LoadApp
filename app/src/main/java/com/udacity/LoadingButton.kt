@@ -53,7 +53,8 @@ class LoadingButton @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.LoadingButton) {
             baseColor = getColor(R.styleable.LoadingButton_baseColor, Color.GREEN)
             animDuration = getInteger(R.styleable.LoadingButton_animDuration, 1000).toLong()
-            textColor.textSize = getDimensionPixelSize(R.styleable.LoadingButton_android_textSize, 16).toFloat()
+            textColor.textSize =
+                getDimensionPixelSize(R.styleable.LoadingButton_android_textSize, 16).toFloat()
         }
 
     }
@@ -79,8 +80,8 @@ class LoadingButton @JvmOverloads constructor(
     private fun showLoading() {
         valueAnimator.apply {
             removeAllUpdateListeners()
-            removeAllListeners()
             cancel()
+            removeAllListeners()
             interpolator = AccelerateDecelerateInterpolator()
             setIntValues(widthSize)
             addUpdateListener {
@@ -114,31 +115,37 @@ class LoadingButton @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        canvas?.drawColor(baseColor)
-        loadingPaint.color = loadingColor
-        canvas?.drawRect(loadingRect, loadingPaint)
-        currentText?.let {
-            textColor.getTextBounds(it, 0, it.length, textBounds)
-            canvas?.drawText(
-                it,
-                (widthSize / 2).toFloat(),
-                heightSize / 2 - textBounds.exactCenterY(),
-                textColor
+        if (canvas != null){
+            canvas.drawColor(baseColor)
+            loadingPaint.color = loadingColor
+            canvas.drawRect(loadingRect, loadingPaint)
+            currentText.let {
+                textColor.getTextBounds(it, 0, it.length, textBounds)
+                canvas?.drawText(
+                    it,
+                    (widthSize / 2).toFloat(),
+                    heightSize / 2 - textBounds.exactCenterY(),
+                    textColor
+                )
+            }
+            loadingPaint.color = ellipseColor
+            val start = (widthSize / 2 + textBounds.exactCenterX()) + textBounds.height() / 2
+            canvas.drawArc(
+                start,
+                (heightSize / 2 - textBounds.height() / 2).toFloat(),
+                start + textBounds.height(),
+                (heightSize / 2 + textBounds.height() / 2).toFloat(),
+                0F,
+                angle,
+                true,
+                loadingPaint
             )
         }
-        loadingPaint.color = ellipseColor
 
-        val start = (widthSize / 2 + textBounds.exactCenterX()) + textBounds.height() / 2
-        canvas?.drawArc(
-            start,
-            (heightSize / 2 - textBounds.height() / 2).toFloat(),
-            start + textBounds.height(),
-            (heightSize / 2 + textBounds.height() / 2).toFloat(),
-            0F,
-            angle,
-            true,
-            loadingPaint
-        )
+
+
+
+
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
